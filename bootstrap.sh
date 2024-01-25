@@ -176,4 +176,4 @@ cd mobius-sandbox
 NOPUSH=1 FORCE_REPO_AND_TAG=$BUILD_REPO_AND_TAG ./Scripts/build-docker-image.sh
 
 # Push template image to the GHCR (creates parking space)
-
+docker push $BUILD_REPO_AND_TAG
