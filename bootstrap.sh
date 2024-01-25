@@ -170,10 +170,16 @@ then
         echo ""
 fi
 
+# DEBUG 
+echo "BUILD_REPO_AND_TAG BEFORE = $BUILD_REPO_AND_TAG"
+
 # Build the template docker image using the repo script 
 cd mobius-sandbox
 ./Scripts/init-buildx-qemu.sh
 NOPUSH=1 FORCE_REPO_AND_TAG=$BUILD_REPO_AND_TAG ./Scripts/build-docker-image.sh
+
+# DEBUG 
+echo "BUILD_REPO_AND_TAG AFTER = $BUILD_REPO_AND_TAG"
 
 # Push template image to the GHCR (creates parking space)
 docker push $BUILD_REPO_AND_TAG
