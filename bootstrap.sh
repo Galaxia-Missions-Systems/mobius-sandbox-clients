@@ -157,6 +157,7 @@ then
         then
                 read -p "Please enter the name of your auth key (~/.ssh/<key_name>): " key_name
                 echo ""
+                echo "key_name=$key_name" >> .env
         fi
 
         git clone -c core.sshCommand="/usr/bin/ssh -i $HOME/.ssh/$key_name" --branch "0.1-dev" git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
@@ -173,3 +174,6 @@ fi
 cd mobius-sandbox
 ./Scripts/init-buildx-qemu.sh
 NOPUSH=1 ./Scripts/build-docker-image.sh
+
+# Push template image to the GHCR (creates parking space)
+
