@@ -173,7 +173,7 @@ fi
 # Build the template docker image using the repo script 
 cd mobius-sandbox
 ./Scripts/init-buildx-qemu.sh
-NOPUSH=1 ./Scripts/build-docker-image.sh
+NOPUSH=1 FORCE_REPO_AND_TAG=$BUILD_REPO_AND_TAG ./Scripts/build-docker-image.sh
 
 # Push template image to the GHCR (creates parking space)
 
