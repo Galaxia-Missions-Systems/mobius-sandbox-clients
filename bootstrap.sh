@@ -69,6 +69,9 @@ case $? in
                 echo ""
                 echo "Please send this public key to your POC at GALAXIA."
                 echo ""
+
+                # Save key name to the .env file 
+                echo "key_name=$key_name" >> .env
                 ;;
         * ) echo "Errors detected in keygen."; exit;;
 esac
