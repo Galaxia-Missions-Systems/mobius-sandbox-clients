@@ -141,7 +141,13 @@ fi
 # Clone the mobius-sandbox repo (read-only)
 if ! [[ -d "mobius-sandbox" ]]
 then
-        git clone git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
+        if [[ -z $key_name ]]
+        then
+                read -p "Please enter the name of your auth key (~/.ssh/<key_name>): " key_name
+                echo ""
+        fi
+
+        git clone -c core.sshCommand="/usr/bin/ssh -i $HOME/.ssh/$key_name" git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
         echo ""
 
         case $? in
