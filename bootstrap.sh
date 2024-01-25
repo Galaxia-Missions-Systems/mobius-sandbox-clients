@@ -156,7 +156,7 @@ then
                 echo ""
         fi
 
-        git clone -c core.sshCommand="/usr/bin/ssh -i $HOME/.ssh/$key_name" git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
+        git clone -c core.sshCommand="/usr/bin/ssh -i $HOME/.ssh/$key_name" --branch "0.1-dev" git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
         echo ""
 
         case $? in
