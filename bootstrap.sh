@@ -158,5 +158,6 @@ then
 fi
 
 # Build the template docker image using the repo script 
-cd mobius-sandbox && ./Scripts/init-buildx-qemu.sh
-cd mobius-sandbox && ./Scripts/build-docker-image.sh
+cd mobius-sandbox
+./Scripts/init-buildx-qemu.sh
+./Scripts/build-docker-image.sh
