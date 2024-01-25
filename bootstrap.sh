@@ -60,7 +60,16 @@ fi
 echo ""
 
 case $? in 
-        0 ) echo "Key generation successful"; echo ""; echo "Your public key is `echo $HOME/.ssh/$key_name.pub`";;
+        0 ) 
+                echo "Key generation successful"; 
+                echo ""; 
+                echo "Your public key is stored in `echo $HOME/.ssh/$key_name.pub`";
+                echo ""
+                echo "\t`cat $HOME/.ssh/$key_name.pub`"
+                echo ""
+                echo "Please send this public key to your POC at GALAXIA."
+                echo ""
+                ;;
         * ) echo "Errors detected in keygen."; exit;;
 esac
 
