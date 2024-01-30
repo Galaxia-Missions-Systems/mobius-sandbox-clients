@@ -185,3 +185,8 @@ echo "BUILD_REPO_AND_TAG AFTER = $BUILD_REPO_AND_TAG"
 
 # Push template image to the GHCR (creates parking space)
 docker push $BUILD_REPO_AND_TAG
+echo ""
+case $? in 
+        0 ) echo "Template container build and push successful.";;
+        * ) echo "Failed to build and push template container. Perhaps docker has not been authenticated yet?"; exit;;
+esac
