@@ -66,7 +66,7 @@ case $? in
                 echo ""; 
                 echo "Your public key is stored in `echo $HOME/.ssh/$key_name.pub`";
                 echo ""
-                echo "\t`cat $HOME/.ssh/$key_name.pub`"
+                echo "`cat $HOME/.ssh/$key_name.pub`"
                 echo ""
                 echo "Please send this public key to your POC at GALAXIA."
                 echo "They will also need the GitHub usernames of all those who will be pushing/pulling containers."
