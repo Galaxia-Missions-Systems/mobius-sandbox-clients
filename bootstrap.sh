@@ -7,6 +7,7 @@
 # 3. Generate the client's SSH deploy key (or let them use their own).
 #       a. Ask them to send it to us to give them write permissions to mobius-sandbox-clients.
 #       b. We also need to give them read permissions for mobius-sandbox
+#       c. They need to give us their GitHub usernames to be added as collabs.
 # ######## FOLLOWING STEPS REQUIRE AUTH ############################
 # 4. Fetch the mobius-sandbox repo (obtains the build environment).
 #       a. Run the necessary setup scripts in there.
@@ -68,6 +69,7 @@ case $? in
                 echo "\t`cat $HOME/.ssh/$key_name.pub`"
                 echo ""
                 echo "Please send this public key to your POC at GALAXIA."
+                echo "They will also need the GitHub usernames of all those who will be pushing/pulling containers."
                 echo ""
 
                 # Save key name to the .env file 
