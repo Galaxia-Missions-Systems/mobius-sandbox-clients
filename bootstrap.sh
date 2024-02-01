@@ -188,5 +188,17 @@ docker push $BUILD_REPO_AND_TAG
 
 case $? in 
         0 ) echo ""; echo "Template container build and push successful.";;
-        * ) echo ""; echo "Failed to build and push template container. Perhaps docker has not been authenticated yet?"; exit;;
+        * ) 
+                echo ""
+                echo "Failed to build and push template container."
+                echo ""
+                echo "Docker troubleshooting tips:"
+                echo "----------------------------"
+                echo "1. Perhaps docker has not been authenticated on the GHCR yet?"
+                echo "2. It is also possible that the current user (`whoami`) is not a member of the 'docker' user group."
+                echo "3. Lastly - ensure that docker was installed according to the instructions found in https://docs.docker.com/engine/install"
+                echo "   Older versions may not have shipped with buildx."
+                echo ""
+                exit
+                ;;
 esac
