@@ -20,7 +20,16 @@
 # 2. mobius-sandbox 
 #       a. Deploy keys (read only)
 
-ASK_KEY() {
+DETECT_WSL()
+{
+if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]
+then
+        return 1
+else
+        return 0
+fi
+}
+
 ASK_KEY()
 {
 read -p "Have your credentials been added as a deploy key at GALAXIA? (y/N): " yn 
@@ -88,6 +97,23 @@ echo ""
 echo "Mobius Sandbox Client"
 echo "v0.1-Alpha"
 echo ""
+
+# Check if running in WSL
+WSL=$(DETECT_WSL)
+if [[ $WSL -eq 1 ]]
+then
+        echo "WARNING: WSL DETECTED"
+        echo ""
+        echo "Please ensure that you are not using WSL in a Windows NTFS directory (such as anywhere on the C:/ drive.)"
+        echo "This can result in undefined behaviour and CR LF conversion issues when fetching git respositories."
+        echo ""
+        read -p "Continue? (Y/N): " yn
+
+        case $yn in
+                [Yy]* ) echo "Proceeding...";;
+                [Nn]* | * ) echo "Aborting."; exit;;
+        esac
+fi
 
 # Source .env 
 if [[ -f .env ]]
