@@ -52,13 +52,14 @@ echo ""
 
 GENERATE_KEYS()
 {
-echo "This step will generate the SSH ed25519 keys needed to login to GitHub."
+echo "This step will generate the SSH ed25519 keys needed to authorize you as a deploy key on the MOBIUS GitHub."
 echo "The steps are identical to those on this page: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent"
 echo ""
 echo "Note for Mac users: you need to add MAC=yes in your .env file for this to work"
 echo ""
 read -p "Enter your GitHub email: " gh_email
-read -p "Enter the name of the key (will be going to ~/.ssh/<key_name>): " key_name 
+echo ""
+echo "The new key will be stored in ~/.ssh/$key_name."
 echo ""
 
 ssh-keygen -t ed25519 -C "$gh_email" -f $HOME/.ssh/$key_name
@@ -186,7 +187,8 @@ if ! [[ -d "mobius-sandbox" ]]
 then
         if [[ -z $key_name ]]
         then
-                read -p "Please enter the name of your auth key (~/.ssh/<key_name>): " key_name
+                key_name=$CLIENT_ID
+                echo "Your auth key is assumed to be stored in (~/.ssh/$key_name): "
                 echo ""
                 echo "key_name=$key_name" >> .env
         fi
