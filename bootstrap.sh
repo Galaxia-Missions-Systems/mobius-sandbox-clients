@@ -21,6 +21,8 @@
 #       a. Deploy keys (read only)
 
 ASK_KEY() {
+ASK_KEY()
+{
 read -p "Have your credentials been added as a deploy key at GALAXIA? (y/N): " yn 
 case $yn in 
         [Nn]* | "" ) 
@@ -39,7 +41,8 @@ esac
 echo ""
 }
 
-GENERATE_KEYS() {
+GENERATE_KEYS()
+{
 echo "This step will generate the SSH ed25519 keys needed to login to GitHub."
 echo "The steps are identical to those on this page: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent"
 echo ""
