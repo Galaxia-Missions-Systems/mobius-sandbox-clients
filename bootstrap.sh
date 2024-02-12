@@ -87,6 +87,12 @@ case $? in
 
                 # Save key name to the .env file 
                 echo "key_name=$key_name" >> .env
+
+                # Inform script will need to be re-run
+                echo "After authentication is complete, please RE-RUN this script with the initialized .env folder in the root directory to proceed to the next steps."
+                echo ""
+
+                exit
                 ;;
         * ) echo "Errors detected in keygen."; exit;;
 esac
