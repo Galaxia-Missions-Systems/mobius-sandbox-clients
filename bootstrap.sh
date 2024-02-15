@@ -22,12 +22,7 @@
 
 DETECT_WSL()
 {
-if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]
-then
-        return 1
-else
-        return 0
-fi
+return $(find /proc/sys/fs/binfmt_misc | grep 'WSLInterop' | wc -l)
 }
 
 ASK_KEY()
@@ -106,8 +101,8 @@ echo "v0.1-Alpha"
 echo ""
 
 # Check if running in WSL
-WSL=$(DETECT_WSL)
-if [[ $WSL -eq 1 ]]
+DETECT_WSL
+if [[ $? -gt 1 ]]
 then
         echo "WARNING: WSL DETECTED"
         echo ""
