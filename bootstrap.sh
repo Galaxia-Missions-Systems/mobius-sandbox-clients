@@ -102,7 +102,7 @@ echo ""
 
 # Check if running in WSL
 DETECT_WSL
-if [[ $? -gt 1 ]]
+if [[ $? -gt 0 ]]
 then
         echo "WARNING: WSL DETECTED"
         echo ""
