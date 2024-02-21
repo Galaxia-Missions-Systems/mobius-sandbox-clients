@@ -174,6 +174,9 @@ else
         echo ""
 fi
 
+# Set keyname to client ID
+key_name=$CLIENT_ID
+
 # Ask about deploy key 
 if [[ -z $AUTH ]]
 then
