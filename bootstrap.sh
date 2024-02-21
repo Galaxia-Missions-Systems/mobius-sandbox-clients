@@ -35,12 +35,18 @@ ASK_KEY()
 read -p "Have your credentials been added as a deploy key at GALAXIA? (y/N): " yn 
 case $yn in 
         [Nn]* | "" ) 
-                read -p "Would you like to generate them now? (Y/n):" yn;
-                echo ""
-                case $yn in 
-                        [Yy]* | "") GENERATE_KEYS;;
-                        [Nn]* ) echo "You will need to be authorized to continue. Contact your POC at GALAXIA."
-                esac
+		if [[ -n $key_name && -f ~/.ssh/$key_name && -f ~/.ssh/$key_name.pub ]]
+		then
+			echo "Your auth keypair has already been generated (~/.ssh/$key_name and ~/.ssh/$key_name.pub)."
+			echo ""
+			echo "Please send the value of the public key below to a GALAXIA point of contact for authorization."
+			echo ""
+			echo "\t$(cat ~/.ssh/$key_name.pub)"
+			echo ""
+		else 
+			ASK_GEN_KEY
+		fi
+		ASK_GEN_KEY
                 ;;
         [Yy]* ) 
                 AUTH=yes
@@ -48,6 +54,16 @@ case $yn in
                 ;;
 esac
 echo ""
+}
+
+ASK_GEN_KEY() 
+{
+read -p "Would you like to generate them now? (Y/n):" yn;
+echo ""
+case $yn in 
+	[Yy]* | "") GENERATE_KEYS;;
+	[Nn]* ) echo "You will need to be authorized to continue. Contact your POC at GALAXIA."
+esac
 }
 
 GENERATE_KEYS()
@@ -169,13 +185,12 @@ then
 
 else
         # Print .env file values 
+	echo ""
         echo "CLIENT_ID=$CLIENT_ID"
         echo "BUILD_REPO_AND_TAG=$BUILD_REPO_AND_TAG"
+	if [[ -n $key_name ]]; then echo "key_name=$key_name"; fi
         echo ""
 fi
-
-# Set keyname to client ID
-key_name=$CLIENT_ID
 
 # Ask about deploy key 
 if [[ -z $AUTH ]]
