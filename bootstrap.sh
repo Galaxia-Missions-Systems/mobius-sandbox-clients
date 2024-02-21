@@ -172,6 +172,9 @@ case $yn in
         [Nn]* ) echo "Client ID rejected. Quitting."; exit;;
 esac
 
+# Set key name to client ID 
+key_name=$CLIENT_ID
+
 if [[ -z $ENV_EXISTS ]]
 then
         # Set missing values 
@@ -188,7 +191,7 @@ else
 	echo ""
         echo "CLIENT_ID=$CLIENT_ID"
         echo "BUILD_REPO_AND_TAG=$BUILD_REPO_AND_TAG"
-	if [[ -n $key_name ]]; then echo "key_name=$key_name"; fi
+	echo "key_name=$key_name"
         echo ""
 fi
 
