@@ -63,7 +63,7 @@ read -p "Would you like to generate them now? (Y/n):" yn;
 echo ""
 case $yn in 
 	[Yy]* | "") GENERATE_KEYS;;
-	[Nn]* ) echo "You will need to be authorized to continue. Contact your POC at GALAXIA."
+	[Nn]* ) echo "You will need to be authorized to continue. Contact your POC at GALAXIA."; exit;;
 esac
 }
 
