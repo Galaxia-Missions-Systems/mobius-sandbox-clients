@@ -42,7 +42,7 @@ case $yn in
 			echo ""
 			echo "Please send the value of the public key below to a GALAXIA point of contact for authorization."
 			echo ""
-			echo "\t$(cat ~/.ssh/$key_name.pub)"
+			echo "        $(cat ~/.ssh/$key_name.pub)"
 			echo ""
 			exit
 		else 
