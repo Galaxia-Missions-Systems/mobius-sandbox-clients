@@ -46,7 +46,6 @@ case $yn in
 		else 
 			ASK_GEN_KEY
 		fi
-		ASK_GEN_KEY
                 ;;
         [Yy]* ) 
                 AUTH=yes
