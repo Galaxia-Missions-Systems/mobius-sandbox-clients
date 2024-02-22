@@ -255,7 +255,7 @@ case $? in
                 echo "----------------------------"
                 echo "1. Ensure that docker was installed according to the instructions found in https://docs.docker.com/engine/install"
                 echo "          Older versions may not have shipped with buildx."
-                echo "2. Perhaps docker has not been authenticated on the Github Container Repository (GHCR) yet?"
+		echo "2. Perhaps docker has not been authenticated on the Github Container Repository (GHCR) yet. See to doing this in https://docs.docker.com/reference/cli/docker/login/ using a Classic Personal Authentication Token (PAT) from your Github account."
                 echo "3. Lastly - it is also possible that the current user (`whoami`) is not a member of the 'docker' user group."
                 echo ""
                 exit
