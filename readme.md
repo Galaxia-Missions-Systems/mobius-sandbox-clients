@@ -2,9 +2,18 @@
 Target: `v0.1 Alpha`
 
 ## Purpose
-This repo serves as a collection point for client-derived Mobius Sandbox containers.
+This repo serves as an entry point for Mobius Sandbox clients and further as a collection point for client-derived Mobius Sandbox containers.
 
-## Bootstrap
+# Getting Started
+## Dependencies
+For the boostrap script to work, a few dependencies are required - namely:
+
+- Git
+- SSH
+- WSL/2 or a UNIX-like System.
+- Docker (https://docs.docker.com/engine/install).
+
+## Bootstrap Script
 To get started, clone this repo and run the bootstrap script:
 
 ``` 
@@ -13,10 +22,72 @@ git clone https://github.com/Galaxia-Missions-Systems/mobius-sandbox-clients.git
 ./bootstrap.sh
 ```
 
-### Dependencies
-For the boostrap script to work, a few dependencies are required - namely:
+The script will take you through the following steps.
 
-- Git
-- SSH
-- WSL/2 or a UNIX-like System.
-- Docker (https://docs.docker.com/engine/install).
+## 1. Setting your Client ID
+Your *Client ID* is a unique self-assigned identifier for yourself and/or your company. 
+
+![Step 1 in bootstrap.sh](/img/1.jpg)
+
+Be mindful of the *Client ID* you choose because it will be used to name authentication key files and store/retrieve your docker containers, for example.
+
+![Step 1.1 in bootstrap.sh](/img/1.1.jpg)
+
+## 2. Validating authentication at GALAXIA
+Next you will be asked whether your credentials have been added as a deploy key at GALAXIA.
+
+![Step 2 of bootstrap.sh](/img/2.jpg)
+
+Answering `No` here will give you the opportunity to generate a new one based on your Client ID and Github email address:
+
+![Step 2.1 of bootstrap.sh](/img/2.1.jpg)
+
+Otherwise, you are free to use your own SSH authentication key if you know it -- please send the public key to a point-of-contact at GALAXIA to proceed.
+
+_NOTE_: Any further attempt to proceed without authentication will lead to issues proceeding with the script.
+
+## 3. Cloning the private `mobius-sandbox` repo
+The next step involves cloning the private `mobius-sandbox` repo -- this is why proper authentication is important. 
+
+![Step 3 of bootstrap.sh](/img/3.jpg)
+
+This repo contains the Dockerfiles and scripts required to develop within the Mobius Sandbox.
+
+## 4. Building the Docker container template
+Assuming the `mobius-sandbox` repo cloned without issue, a template Docker container (your Mobius Sandbox) will begin building.
+
+![Step 4 of bootstrap.sh](/img/4.jpg)
+
+This requires both Docker to be installed and user permissions (namely the active user being a part of the `docker` group) to work.
+
+Completion of this steps involves the building of a bare template Sandbox container. It serves as the building block for the development of your Mobius App.
+
+## 5. Pushing the container to GALAXIA's Github Container Repo (GHCR)
+The final step involves pushing the built template container to your unique client container tag in GALAXIA's Github Container Repo (GHCR).
+
+![Step 5 of bootstrap.sh](/img/5.jpg)
+
+When pushed successfully, all necessary prerequisites are considered in-place for development. The successful push also safeguards your container's Client ID tag in GALAXIA's Github Container Repo.
+
+## Troubleshooting
+Issues may occur, particularly when building and pushing the template Docker container to GALAXIA's GHCR.
+
+![Troubleshooting Error](/img/T.jpg)
+
+In these cases, it is always best to try one or more of the 3 troubleshooting tips for Docker:
+> 1. Ensure that docker was installed according to the instructions found in https://docs.docker.com/engine/install
+
+This is because some Docker distributions do not ship with `buildx`, a necessary component of the emulation layer.
+
+> 2. Perhaps docker has not been authenticated on the Github Container Repository (GHCR) yet. See to doing this in https://docs.docker.com/reference/cli/docker/login/ using a Classic Personal Authentication Token (PAT) from your Github account.
+
+This part requires a Classic Personal Authentication Token (Classic PAT) to be generated from your Github user settings. You will also need to have been added a collaborator to the repo, as pre your GALAXIA point-of-contact would have permitted.
+
+> 3. Lastly - it is also possible that the current user (alex) is not a member of the 'docker' user group.
+
+This is a common error for `docker permission denied` issues, largely having to do with needing to run `sudo docker` for docker commands to work.
+
+This can easily be remedied by adding the current user to the `docker` group using the command `sudo usermod -a -G docker $(whoami)`. 
+
+You can also replace `$(whoami)` with the name of your user (e.g.: in my case this would mean `sudo usermod -a -G docker alex`).
+
