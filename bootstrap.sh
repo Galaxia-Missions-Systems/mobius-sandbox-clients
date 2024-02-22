@@ -131,11 +131,11 @@ then
         echo "Please ensure that you are not using WSL in a Windows NTFS directory (such as anywhere on the C:/ drive.)"
         echo "This can result in undefined behaviour and CR LF conversion issues when fetching git respositories."
         echo ""
-        read -p "Continue? (Y/N): " yn
+        read -p "Continue? (Y/n): " yn
 
         case $yn in
-                [Yy]* ) echo "Proceeding...";;
-                [Nn]* | * ) echo "Aborting."; exit;;
+                [Yy]* | * ) echo "Proceeding...";;
+                [Nn]* ) echo "Aborting."; exit;;
         esac
 fi
 
