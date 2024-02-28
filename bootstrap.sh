@@ -152,8 +152,8 @@ then
         echo "You will be prompted to enter your client ID."
         echo "Note this can be anything you want so long as it is descriptive of your company/project."
         echo ""
-        echo "Whatever you set now will persist so choose wisely."
-        echo ""
+	echo "If you were not given a *Client ID*, please invent one suitable for your company. Make sure it is unique and used consistently during development."
+	echo ""
         # Ask for client name 
         read -p "Enter your client ID: " CLIENT_ID
         echo ""

@@ -14,7 +14,13 @@ For the boostrap script to work, a few dependencies are required - namely:
 - Docker (https://docs.docker.com/engine/install).
 
 ## Bootstrap Script
-To get started, clone this repo and run the bootstrap script:
+_NOTE_: This script is meant to run in a UNIX-like environment. It has been tested on the following systems:
+
+- Windows WSL2 (Ubuntu),
+- Ubuntu 22.04,
+- Arch Linux 6.6
+
+**To get started, clone this repo and run the bootstrap script:**
 
 ``` 
 git clone https://github.com/Galaxia-Missions-Systems/mobius-sandbox-clients.git
@@ -25,7 +31,9 @@ git clone https://github.com/Galaxia-Missions-Systems/mobius-sandbox-clients.git
 The script will take you through the following steps.
 
 ## 1. Setting your Client ID
-Your *Client ID* is a unique self-assigned identifier for yourself and/or your company. 
+Your *Client ID* is a unique self-assigned identifier for yourself and/or your company.
+
+If you were not given a *Client ID*, please invent one suitable for your company. Make sure it is unique and used consistently during development.
 
 ![Step 1 in bootstrap.sh](/img/1.jpg)
 
