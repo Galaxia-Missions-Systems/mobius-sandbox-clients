@@ -78,6 +78,8 @@ read -p "Enter your GitHub email: " gh_email
 echo ""
 echo "The new key will be stored in ~/.ssh/$key_name."
 echo ""
+echo "When asked for a passphrase, this is **NOT** your Github password -- this is a passphrase which locally encrypts the SSH key. The choice to do this is at your own discretion."
+echo ""
 
 ssh-keygen -t ed25519 -C "$gh_email" -f $HOME/.ssh/$key_name
 eval "$(ssh-agent -s)"
