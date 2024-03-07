@@ -57,6 +57,8 @@ Next you will be asked whether your credentials have been added at GALAXIA.
 
 Please send your Github username to a point-of-contact at GALAXIA to proceed. Make sure your system is authenticated with an SSH key on your Github account as well (as instructed in https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
+_NOTE_: If you generated an SSH key for your Github account under a _non standard key path_ (i.e.: not the usual `~/.ssh/id_ed25519` path) you are free to specify your custom key path in the `.env` file at the root of the directory by setting `custom_key=~/.ssh/key_path`.
+
 _NOTE_: Any further attempt to proceed without authentication will lead to issues proceeding with the script.
 
 ### 3. Running the `./continue.sh` script
