@@ -53,15 +53,9 @@ Be mindful of the *Client ID* you choose because it will be used to name authent
 ![Step 1.1 in bootstrap.sh](/img/1.1.jpg)
 
 ### 2. Validating authentication at GALAXIA
-Next you will be asked whether your credentials have been added as a deploy key at GALAXIA.
+Next you will be asked whether your credentials have been added at GALAXIA.
 
-![Step 2 of bootstrap.sh](/img/2.jpg)
-
-Answering `No` here will give you the opportunity to generate a new one based on your Client ID and Github email address:
-
-![Step 2.1 of bootstrap.sh](/img/2.1.jpg)
-
-Otherwise, you are free to use your own SSH authentication key if you know it -- please send the public key to a point-of-contact at GALAXIA to proceed.
+Please send your Github username to a point-of-contact at GALAXIA to proceed. Make sure your system is authenticated with an SSH key on your Github account as well (as instructed in https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
 _NOTE_: Any further attempt to proceed without authentication will lead to issues proceeding with the script.
 
