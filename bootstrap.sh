@@ -35,13 +35,8 @@ ASK_KEY()
 read -p "Have your credentials been added as a deploy key at GALAXIA? (y/N): " yn 
 case $yn in 
         [Nn]* | "" ) 
-		if [[ -n $key_name && -f ~/.ssh/$key_name && -f ~/.ssh/$key_name.pub ]]
-		then
-                        PUBLIC_KEY_NOTICE
-			exit
-		else 
-			ASK_GEN_KEY
-		fi
+                GH_USERNAME_NOTICE
+                exit
                 ;;
         [Yy]* ) 
                 AUTH=yes
@@ -117,6 +112,22 @@ echo ""
 echo "Please send the value of the public key below to a GALAXIA point of contact for authorization."
 echo ""
 echo "        $(cat ~/.ssh/$key_name.pub)"
+echo ""
+echo "When complete, run the ./continue.sh script to proceed with the on-boarding process."
+echo ""
+}
+
+GH_USERNAME_NOTICE() 
+{
+echo "#!/bin/bash
+./bootstrap.sh" > continue.sh 
+chmod +x continue.sh
+
+echo ""
+echo "To continue, you will need to send your Github username to a GALAXIA point of contact for authorization."
+echo ""
+echo "Make sure you have setup this machine's SSH key to work with your Github account."
+echo "See this page for more information: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent"
 echo ""
 echo "When complete, run the ./continue.sh script to proceed with the on-boarding process."
 echo ""
@@ -198,6 +209,10 @@ else
         echo "CLIENT_ID=$CLIENT_ID"
         echo "BUILD_REPO_AND_TAG=$BUILD_REPO_AND_TAG"
 	echo "key_name=$key_name"
+        if [[ -n $custom_key ]]
+        then
+                echo "custom_key=$custom_key"
+        fi
         echo ""
 fi
 
@@ -211,22 +226,20 @@ then
         read -p "Has this changed? (Y/n): " yn 
         case $yn in 
                 [Yy]* | "") ASK_KEY;;
-                [Nn]* ) echo "You will need to be authorized to continue."; exit;;
+                [Nn]* ) GH_USERNAME_NOTICE; exit;;
         esac
 fi
 
 # Clone the mobius-sandbox repo (read-only)
 if ! [[ -d "mobius-sandbox" ]]
 then
-        if [[ -z $key_name ]]
+        if [[ -n $custom_key ]]
         then
-                key_name=$CLIENT_ID
-                echo "Your auth key is assumed to be stored in (~/.ssh/$key_name): "
-                echo ""
-                echo "key_name=$key_name" >> .env
+                echo "Using custom_key=$custom_key..."
+                git clone -c core.sshCommand="/usr/bin/ssh -i $custom_key" --branch "0.1-dev" --recurse-submodules git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
+        else
+                git clone --branch "0.1-dev" --recurse-submodules git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
         fi
-
-        git clone -c core.sshCommand="/usr/bin/ssh -i $HOME/.ssh/$key_name" --branch "0.1-dev" --recurse-submodules git@github.com:Galaxia-Missions-Systems/mobius-sandbox.git
         echo ""
 
         case $? in
