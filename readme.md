@@ -4,6 +4,11 @@ Target: `v0.1 Alpha`
 ## Purpose
 This repo serves as an entry point for Mobius Sandbox clients and further as a collection point for client-derived Mobius Sandbox containers.
 
+## Point of Contact
+Getting in touch with a GALAXIA Point-of-Contact (POC) is required at certain steps, particularly when dealing with authentication.
+
+As of March 7th, 2024, the listed GALAXIA POC is Alex A. Amellal (aaa@galaxiams.com).
+
 # Getting Started
 ## Dependencies
 For the boostrap script to work, a few dependencies are required - namely:
