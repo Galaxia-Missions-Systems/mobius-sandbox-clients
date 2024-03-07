@@ -30,6 +30,11 @@ git clone https://github.com/Galaxia-Missions-Systems/mobius-sandbox-clients.git
 
 The script will take you through the following steps.
 
+### Running on Windows
+To run this script on Windows, **please use WSL/WSL2 inside of a Linux directory** (working within a Windows NTFS directory aka C:\ drive WILL cause issues).
+
+The rest of the instructions may be followed as normal once in the WSL/WSL2 environment.
+
 ## 1. Setting your Client ID
 Your *Client ID* is a unique self-assigned identifier for yourself and/or your company.
 
