@@ -37,19 +37,7 @@ case $yn in
         [Nn]* | "" ) 
 		if [[ -n $key_name && -f ~/.ssh/$key_name && -f ~/.ssh/$key_name.pub ]]
 		then
-			echo "#!/bin/bash
-			./bootstrap.sh" > continue.sh 
-			chmod +x continue.sh
-
-			echo ""
-			echo "Your auth keypair has already been generated (~/.ssh/$key_name and ~/.ssh/$key_name.pub)."
-			echo ""
-			echo "Please send the value of the public key below to a GALAXIA point of contact for authorization."
-			echo ""
-			echo "        $(cat ~/.ssh/$key_name.pub)"
-			echo ""
-			echo "When complete, run the ./continue.sh script to proceed with the on-boarding process."
-			echo ""
+                        PUBLIC_KEY_NOTICE
 			exit
 		else 
 			ASK_GEN_KEY
@@ -102,26 +90,35 @@ case $? in
         0 ) 
                 echo "Key generation successful"; 
                 echo ""; 
-                echo "Your public key is stored in `echo $HOME/.ssh/$key_name.pub`";
-                echo ""
-                echo "    `cat $HOME/.ssh/$key_name.pub`"
-                echo ""
-                echo "Please send this public key to your POC at GALAXIA."
-                echo "They will also need the GitHub usernames of all those who will be pushing/pulling containers."
-                echo ""
+
+                PUBLIC_KEY_NOTICE
 
                 # Save key name to the .env file 
                 echo "key_name=$key_name" >> .env
-
-                # Inform script will need to be re-run
-                echo "After authentication is complete, please RE-RUN this script with the initialized .env folder in the root directory to proceed to the next steps."
-                echo ""
 
                 exit
                 ;;
         * ) echo "Errors detected in keygen."; exit;;
 esac
 
+echo ""
+}
+
+PUBLIC_KEY_NOTICE() 
+{
+
+echo "#!/bin/bash
+./bootstrap.sh" > continue.sh 
+chmod +x continue.sh
+
+echo ""
+echo "Your auth keypair has already been generated (~/.ssh/$key_name and ~/.ssh/$key_name.pub)."
+echo ""
+echo "Please send the value of the public key below to a GALAXIA point of contact for authorization."
+echo ""
+echo "        $(cat ~/.ssh/$key_name.pub)"
+echo ""
+echo "When complete, run the ./continue.sh script to proceed with the on-boarding process."
 echo ""
 }
 
