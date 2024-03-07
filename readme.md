@@ -40,7 +40,8 @@ To run this script on Windows, **please use WSL/WSL2 inside of a Linux directory
 
 The rest of the instructions may be followed as normal once in the WSL/WSL2 environment.
 
-## 1. Setting your Client ID
+## Running the `bootstrap.sh` script
+### 1. Setting your Client ID
 Your *Client ID* is a unique self-assigned identifier for yourself and/or your company.
 
 If you were not given a *Client ID*, please invent one suitable for your company. Make sure it is unique and used consistently during development.
@@ -51,7 +52,7 @@ Be mindful of the *Client ID* you choose because it will be used to name authent
 
 ![Step 1.1 in bootstrap.sh](/img/1.1.jpg)
 
-## 2. Validating authentication at GALAXIA
+### 2. Validating authentication at GALAXIA
 Next you will be asked whether your credentials have been added as a deploy key at GALAXIA.
 
 ![Step 2 of bootstrap.sh](/img/2.jpg)
@@ -64,14 +65,18 @@ Otherwise, you are free to use your own SSH authentication key if you know it --
 
 _NOTE_: Any further attempt to proceed without authentication will lead to issues proceeding with the script.
 
-## 3. Cloning the private `mobius-sandbox` repo
-The next step involves cloning the private `mobius-sandbox` repo -- this is why proper authentication is important. 
+### 3. Running the `./continue.sh` script
+After SSH key generation is complete, a `continue.sh` script will appear in the working directory. This is intended to be run _only_ after authentication at GALAXIA has been complete by the POC.
+
+This script will automatically clone the private `mobius-sandbox` repo -- this is why proper authentication is important. 
 
 ![Step 3 of bootstrap.sh](/img/3.jpg)
 
 This repo contains the Dockerfiles and scripts required to develop within the Mobius Sandbox.
 
-## 4. Building the Docker container template
+From there, the `continue.sh` script will also handle the following steps.
+
+### 4. Building the Docker container template
 Assuming the `mobius-sandbox` repo cloned without issue, a template Docker container (your Mobius Sandbox) will begin building.
 
 ![Step 4 of bootstrap.sh](/img/4.jpg)
@@ -80,7 +85,7 @@ This requires both Docker to be installed and user permissions (namely the activ
 
 Completion of this steps involves the building of a bare template Sandbox container. It serves as the building block for the development of your Mobius App.
 
-## 5. Pushing the container to GALAXIA's Github Container Repo (GHCR)
+### 5. Pushing the container to GALAXIA's Github Container Repo (GHCR)
 The final step involves pushing the built template container to your unique client container tag in GALAXIA's Github Container Repo (GHCR).
 
 ![Step 5 of bootstrap.sh](/img/5.jpg)
